@@ -1,32 +1,19 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from "react";
 
-export function useActiveSection(sectionIds) {
-  const [activeSection, setActiveSection] = useState(sectionIds[0] || '');
+/** Returns the id of the section currently in the middle of the viewport. */
+export default function useActiveSection(ids) {
+  const [active, setActive] = useState("");
 
   useEffect(() => {
-    const observers = [];
+    const els = ids.map((id) => document.getElementById(id)).filter(Boolean);
+    if (!els.length || !("IntersectionObserver" in window)) return;
+    const io = new IntersectionObserver(
+      (entries) => entries.forEach((e) => e.isIntersecting && setActive(e.target.id)),
+      { rootMargin: "-40% 0px -55% 0px" }
+    );
+    els.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, [ids]);
 
-    sectionIds.forEach((id) => {
-      const element = document.getElementById(id);
-      if (!element) return;
-
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            setActiveSection(id);
-          }
-        },
-        { threshold: 0.4, rootMargin: '-20% 0px -40% 0px' }
-      );
-
-      observer.observe(element);
-      observers.push(observer);
-    });
-
-    return () => {
-      observers.forEach((obs) => obs.disconnect());
-    };
-  }, [sectionIds]);
-
-  return activeSection;
+  return active;
 }

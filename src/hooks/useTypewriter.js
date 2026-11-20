@@ -1,32 +1,34 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from "react";
 
-export function useTypewriter(texts, typingSpeed = 100, deletingSpeed = 50, pauseTime = 2000) {
-  const [displayText, setDisplayText] = useState('');
-  const [textIndex, setTextIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
+const prefersReduced = () =>
+  typeof window !== "undefined" &&
+  window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+
+/** Types and deletes through `words`. `words` must be a stable (module-level) array. */
+export default function useTypewriter(words, { type = 90, erase = 50, hold = 1100 } = {}) {
+  const [index, setIndex] = useState(0);
+  const [text, setText] = useState("");
+  const [deleting, setDeleting] = useState(false);
+  const reduced = prefersReduced();
 
   useEffect(() => {
-    const currentText = texts[textIndex];
+    if (reduced) return;
+    const word = words[index];
+    let timer;
 
-    const timeout = setTimeout(() => {
-      if (!isDeleting) {
-        if (displayText.length < currentText.length) {
-          setDisplayText(currentText.slice(0, displayText.length + 1));
-        } else {
-          setTimeout(() => setIsDeleting(true), pauseTime);
-        }
-      } else {
-        if (displayText.length > 0) {
-          setDisplayText(currentText.slice(0, displayText.length - 1));
-        } else {
-          setIsDeleting(false);
-          setTextIndex((prev) => (prev + 1) % texts.length);
-        }
-      }
-    }, isDeleting ? deletingSpeed : typingSpeed);
+    if (!deleting && text === word) {
+      timer = setTimeout(() => setDeleting(true), hold);
+    } else if (deleting && text === "") {
+      setDeleting(false);
+      setIndex((i) => (i + 1) % words.length);
+    } else {
+      timer = setTimeout(
+        () => setText(word.slice(0, text.length + (deleting ? -1 : 1))),
+        deleting ? erase : type
+      );
+    }
+    return () => clearTimeout(timer);
+  }, [text, deleting, index, words, type, erase, hold, reduced]);
 
-    return () => clearTimeout(timeout);
-  }, [displayText, isDeleting, textIndex, texts, typingSpeed, deletingSpeed, pauseTime]);
-
-  return displayText;
+  return reduced ? words[0] : text;
 }
