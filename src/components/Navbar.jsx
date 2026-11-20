@@ -39,9 +39,9 @@ export default function Navbar() {
     >
       <div className="container-width flex h-18 items-center justify-between">
         <a href="#home" className="text-lg font-bold tracking-tight" aria-label="Back to top">
-          <span className="text-white"><</span>
+          <span className="text-white">{'<'}</span>
           <span className="text-amber-400 uppercase">{site.name}</span>
-          <span className="text-white">></span>
+          <span className="text-white">{'>'}</span>
         </a>
 
         <nav className="hidden items-center gap-1 md:flex" aria-label="Primary">
