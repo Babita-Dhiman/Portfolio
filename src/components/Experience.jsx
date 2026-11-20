@@ -1,55 +1,76 @@
-import { Briefcase } from "lucide-react";
+import { Check } from "lucide-react";
+import { site } from "../data/site";
+import { projects } from "../data/projects";
 import Reveal from "./Reveal";
 import SectionHeading from "./SectionHeading";
 
-const jobs = [
-  {
-    role: "Frontend Developer",
-    company: "Freelance / Personal Projects",
-    period: "2023 – Present",
-    points: [
-      "Building responsive websites and web apps using React, Tailwind CSS and modern frontend tools.",
-      "Translating designs into clean, reusable components with attention to spacing, typography and accessibility.",
-      "Working with WordPress, Elementor and page builders for client-ready websites.",
-    ],
-  },
+const work = [
+  "Visual design & styling",
+  "Page layouts & navigation",
+  "Typography & spacing",
+  "Elementor customization",
+  "Responsive adjustments",
+  "Client feedback revisions",
 ];
+const tools = ["HTML", "CSS", "Bootstrap", "JavaScript Basics", "React Basics", "WordPress", "Git/GitHub"];
 
 export default function Experience() {
   return (
     <section id="experience" className="py-24">
       <div className="container-width">
         <Reveal>
-          <SectionHeading number="04" label="Experience" title="Where I've worked." />
+          <SectionHeading number="03" label="Experience" title="My recent experience." />
         </Reveal>
 
-        <div className="mt-10 space-y-6">
-          {jobs.map((job, i) => (
-            <Reveal key={job.role} delay={i * 80}>
-              <div className="glass rounded-3xl p-6 transition hover:border-amber-400/30 sm:p-8">
-                <div className="flex flex-wrap items-start justify-between gap-4">
-                  <div className="flex items-start gap-4">
-                    <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-amber-400/10 text-amber-400">
-                      <Briefcase size={22} />
+        <Reveal delay={100}>
+          <div className="mt-10 border-l border-white/10 pl-6">
+            <div className="relative">
+              <span className="absolute -left-[31px] top-1 h-3 w-3 rounded-full bg-amber-400 ring-8 ring-[#070707]" />
+              <h3 className="text-xl font-bold">{site.role}</h3>
+              <p className="mt-1 text-amber-400">{site.experienceMonths} Months Experience</p>
+
+              <p className="mt-5 max-w-3xl leading-7 text-zinc-400">
+                Worked on live client websites built with WordPress (Elementor) and Square Online — focused on
+                visual design, page layouts and responsive presentation.
+              </p>
+
+              <ul className="mt-6 grid max-w-3xl gap-x-6 gap-y-3 sm:grid-cols-2">
+                {work.map((item) => (
+                  <li key={item} className="flex items-center gap-3 text-sm text-zinc-300">
+                    <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-amber-400/15 text-amber-400">
+                      <Check size={12} strokeWidth={3} />
                     </span>
-                    <div>
-                      <h3 className="text-xl font-bold text-zinc-100">{job.role}</h3>
-                      <p className="mt-1 text-sm text-zinc-400">{job.company}</p>
-                    </div>
-                  </div>
-                  <span className="rounded-full bg-white/[.06] px-3 py-1 text-sm text-zinc-400">{job.period}</span>
-                </div>
-                <ul className="mt-5 space-y-2 pl-16">
-                  {job.points.map((point) => (
-                    <li key={point} className="relative text-sm leading-7 text-zinc-400 before:absolute before:-left-4 before:top-3 before:h-1.5 before:w-1.5 before:rounded-full before:bg-amber-400/60">
-                      {point}
-                    </li>
-                  ))}
-                </ul>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+
+              <p className="mt-8 text-xs font-semibold uppercase tracking-widest text-zinc-500">Live sites</p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {projects.map((p) => (
+                  <a
+                    key={p.title}
+                    href={p.live}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="rounded-full border border-white/10 px-3 py-1.5 text-xs text-zinc-300 transition hover:border-amber-400/40 hover:text-amber-300"
+                  >
+                    {p.title.split(" — ")[0]} ↗
+                  </a>
+                ))}
               </div>
-            </Reveal>
-          ))}
-        </div>
+
+              <p className="mt-6 text-xs font-semibold uppercase tracking-widest text-zinc-500">Tools</p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {tools.map((x) => (
+                  <span key={x} className="rounded-full border border-white/10 px-3 py-1.5 text-xs text-zinc-400">
+                    {x}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </Reveal>
       </div>
     </section>
   );
