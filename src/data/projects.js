@@ -5,6 +5,7 @@ export const projects = [
     title: "Chugach Grown",
     category: "Square Online",
     live: "https://www.chugachgrown.com/",
+    summary: "Visual design, shop pages and responsive layout work for an Alaskan products site.",
     points: [
       "Worked on the website's visual design and styling, including the Shop and Subsistence pages.",
       "Refined page layouts, navigation and the presentation of products and publications.",
@@ -18,6 +19,7 @@ export const projects = [
     title: "Rim Science",
     category: "WordPress",
     live: "https://rimscience.it/",
+    summary: "Elementor page design, typography and responsive layouts for a science brand.",
     points: [
       "Worked on website page design and customization using Elementor.",
       "Styled content sections and page layouts to create a clean and consistent appearance.",
@@ -31,6 +33,7 @@ export const projects = [
     title: "Revived Kansas",
     category: "WordPress",
     live: "https://revivedkansas.info/",
+    summary: "Visual presentation and service/pricing sections for a multi-page healthcare site.",
     points: [
       "Worked on the visual presentation of a multi-page healthcare website.",
       "Styled homepage, service and pricing sections with a focus on clear content presentation.",
@@ -43,6 +46,7 @@ export const projects = [
     title: "Cash Home Buy Ontario",
     category: "WordPress",
     live: "https://cashhomebuyontario.ca/",
+    summary: "Layout and section styling for a real-estate lead generation website.",
     points: [
       "Worked on the visual design and layout of a real-estate website.",
       "Styled homepage, process, service-area and FAQ sections.",
@@ -55,6 +59,7 @@ export const projects = [
     title: "Migration Options",
     category: "WordPress",
     live: "https://www.migrationoptions.com.au/",
+    summary: "Service pages, enquiry flow and responsive layout for a visa consultancy site.",
     points: [
       "Migration and visa consultancy website — service pages, enquiry flow and responsive layout work across desktop, tablet and mobile.",
     ],
