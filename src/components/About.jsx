@@ -13,7 +13,7 @@ export default function About() {
   return (
     <section id="about" className="py-24">
       <div className="container-width grid gap-10 lg:grid-cols-[.7fr_1.3fr]">
-        <Reveal>
+        <Reveal className="lg:sticky lg:top-28 lg:self-start">
           <SectionHeading number="01" label="About" title="A frontend developer who cares about details." />
         </Reveal>
 
