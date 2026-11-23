@@ -1,5 +1,5 @@
-import { useMemo, useState } from "react";
-import { ExternalLink, ArrowUpRight } from "lucide-react";
+import { useMemo, useState, useEffect } from "react";
+import { ExternalLink, ArrowUpRight, X } from "lucide-react";
 import { projects } from "../data/projects";
 import Reveal from "./Reveal";
 import SectionHeading from "./SectionHeading";
@@ -16,8 +16,8 @@ const initials = (title) =>
 
 export default function Projects() {
   const [filter, setFilter] = useState("All");
+  const [selected, setSelected] = useState(null);
 
-  // Filters come from each project's `category`, with counts.
   const filters = useMemo(() => {
     const cats = [...new Set(projects.map((p) => p.category))];
     return [
@@ -27,6 +27,20 @@ export default function Projects() {
   }, []);
 
   const visible = filter === "All" ? projects : projects.filter((p) => p.category === filter);
+
+  // Close modal on Escape
+  useEffect(() => {
+    if (!selected) return;
+    const onKey = (e) => {
+      if (e.key === "Escape") setSelected(null);
+    };
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [selected]);
 
   return (
     <section id="projects" className="border-y border-white/5 bg-white/[.015] py-24">
@@ -60,13 +74,7 @@ export default function Projects() {
           {visible.map((project, i) => (
             <Reveal key={project.title} delay={(i % 3) * 80} className="h-full">
               <article className="glass group flex h-full flex-col rounded-3xl p-5 transition duration-300 hover:-translate-y-1 hover:border-amber-400/30">
-                <a
-                  href={project.live}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label={`Visit ${project.title}`}
-                  className="block overflow-hidden rounded-2xl border border-white/10 bg-zinc-950"
-                >
+                <div className="overflow-hidden rounded-2xl border border-white/10 bg-zinc-950">
                   {/* mini browser frame */}
                   <div className="flex items-center gap-2 border-b border-white/10 bg-white/[.03] px-3 py-2">
                     <span className="flex gap-1" aria-hidden="true">
@@ -86,7 +94,7 @@ export default function Projects() {
                       {initials(project.title)}
                     </span>
                   </div>
-                </a>
+                </div>
 
                 <div className="mt-5 flex flex-wrap items-center gap-2">
                   <p className="text-xs font-semibold uppercase tracking-widest text-amber-400">{project.category}</p>
@@ -98,37 +106,115 @@ export default function Projects() {
                 </div>
 
                 <h3 className="mt-2 text-xl font-bold">{project.title}</h3>
-                <ul className="mt-3 flex-1 space-y-2 text-sm leading-6 text-zinc-400">
-                  {project.points.map((point) => (
-                    <li key={point} className="flex gap-2.5">
-                      <span className="mt-2.5 h-1 w-1 shrink-0 rounded-full bg-amber-400" aria-hidden="true" />
-                      {point}
-                    </li>
-                  ))}
-                </ul>
 
-                <ul className="mt-4 flex flex-wrap gap-1.5">
-                  {project.tech.map((t) => (
-                    <li key={t} className="rounded-md bg-white/[.05] px-2 py-1 text-[11px] text-zinc-400">
-                      {t}
-                    </li>
-                  ))}
-                </ul>
+                <p className="mt-2 flex-1 text-sm leading-6 text-zinc-400">
+                  {project.summary}
+                </p>
 
-                <a
-                  href={project.live}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-amber-400 transition hover:text-amber-300"
-                >
-                  <ExternalLink size={16} /> Visit Website
-                  <ArrowUpRight size={14} className="transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </a>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setSelected(project)}
+                    className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-full border border-white/15 px-4 py-2.5 text-sm font-semibold transition hover:border-amber-400/40 hover:bg-white/[.04]"
+                  >
+                    View Details
+                  </button>
+                  <a
+                    href={project.live}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-full bg-amber-400 px-4 py-2.5 text-sm font-semibold text-black transition hover:bg-amber-300"
+                  >
+                    Visit Website <ArrowUpRight size={15} />
+                  </a>
+                </div>
               </article>
             </Reveal>
           ))}
         </div>
       </div>
+
+      {/* Modal */}
+      {selected && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="project-modal-title"
+        >
+          <div
+            className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+            onClick={() => setSelected(null)}
+          />
+          <div className="relative z-10 w-full max-w-lg overflow-hidden rounded-3xl border border-white/10 bg-zinc-950 shadow-2xl">
+            <div className={`relative grid h-40 place-items-center bg-gradient-to-br ${selected.accent}`}>
+              <span className="text-7xl font-black tracking-tighter text-white/20">
+                {initials(selected.title)}
+              </span>
+              <button
+                type="button"
+                onClick={() => setSelected(null)}
+                aria-label="Close"
+                className="absolute right-4 top-4 grid h-9 w-9 place-items-center rounded-full border border-white/15 bg-black/40 text-white transition hover:bg-black/60"
+              >
+                <X size={18} />
+              </button>
+            </div>
+
+            <div className="p-6">
+              <div className="flex flex-wrap items-center gap-2">
+                <p className="text-xs font-semibold uppercase tracking-widest text-amber-400">
+                  {selected.category}
+                </p>
+                {selected.tag && (
+                  <span className="rounded-full border border-white/10 px-2 py-0.5 text-[11px] text-zinc-500">
+                    {selected.tag}
+                  </span>
+                )}
+              </div>
+
+              <h3 id="project-modal-title" className="mt-2 text-2xl font-bold">
+                {selected.title}
+              </h3>
+
+              <ul className="mt-4 space-y-2.5 text-sm leading-6 text-zinc-400">
+                {selected.points.map((point) => (
+                  <li key={point} className="flex gap-2.5">
+                    <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-400" aria-hidden="true" />
+                    {point}
+                  </li>
+                ))}
+              </ul>
+
+              <ul className="mt-5 flex flex-wrap gap-1.5">
+                {selected.tech.map((t) => (
+                  <li key={t} className="rounded-md bg-white/[.05] px-2.5 py-1 text-[11px] text-zinc-400">
+                    {t}
+                  </li>
+                ))}
+              </ul>
+
+              <div className="mt-6 flex flex-wrap gap-3">
+                <a
+                  href={selected.live}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-amber-400 px-5 py-3 text-sm font-semibold text-black transition hover:bg-amber-300"
+                >
+                  <ExternalLink size={16} /> Visit Website
+                </a>
+                <button
+                  type="button"
+                  onClick={() => setSelected(null)}
+                  className="inline-flex items-center justify-center rounded-full border border-white/15 px-5 py-3 text-sm font-semibold transition hover:border-white/30 hover:bg-white/[.04]"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
