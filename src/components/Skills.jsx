@@ -5,7 +5,7 @@ import SectionHeading from "./SectionHeading";
 const groups = [
   { title: "Frontend", icon: Code2, items: ["HTML5", "CSS3", "JavaScript Basics", "React Basics", "Tailwind CSS", "Bootstrap"] },
   { title: "CMS & UI", icon: Layers, items: ["WordPress", "Elementor", "Beaver Builder", "Responsive Design", "UI Implementation", "Wix", "Square Online", "Webflow"] },
-  { title: "Workflow", icon: GitBranch, items: ["Git", "GitHub", "REST APIs", "VS Code", "Vite", "Browser DevTools"] },
+  { title: "Workflow", icon: GitBranch, items: ["Git", "GitHub", "VS Code", "Browser DevTools"] },
 ];
 
 export default function Skills() {
