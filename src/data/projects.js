@@ -63,4 +63,15 @@ export const projects = [
     tag: "Migration",
     accent: "from-amber-500/30 to-orange-500/10",
   },
+  {
+    title: "Migration Options",
+    category: "WordPress",
+    live: "https://www.migrationoptions.com.au/",
+    points: [
+      "Migration and visa consultancy website — service pages, enquiry flow and responsive layout work across desktop, tablet and mobile.",
+    ],
+    tech: ["WordPress", "Responsive Layout", "UI Fixes"],
+    tag: "AU • Consultancy",
+    accent: "from-rose-500/30 to-pink-500/10",
+  },
 ];
