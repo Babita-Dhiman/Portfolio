@@ -14,9 +14,12 @@ const initials = (title) =>
     .join("")
     .toUpperCase();
 
+const PAGE_SIZE = 6;
+
 export default function Projects() {
   const [filter, setFilter] = useState("All");
   const [selected, setSelected] = useState(null);
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
 
   const filters = useMemo(() => {
     const cats = [...new Set(projects.map((p) => p.category))];
@@ -26,7 +29,15 @@ export default function Projects() {
     ];
   }, []);
 
-  const visible = filter === "All" ? projects : projects.filter((p) => p.category === filter);
+  const filtered = filter === "All" ? projects : projects.filter((p) => p.category === filter);
+  const visible = filtered.slice(0, visibleCount);
+  const hasMore = visibleCount < filtered.length;
+
+  // Reset visible count when filter changes
+  const handleFilter = (name) => {
+    setFilter(name);
+    setVisibleCount(PAGE_SIZE);
+  };
 
   // Close modal on Escape
   useEffect(() => {
@@ -55,7 +66,7 @@ export default function Projects() {
               {filters.map(({ name, count }) => (
                 <button
                   key={name}
-                  onClick={() => setFilter(name)}
+                  onClick={() => handleFilter(name)}
                   aria-pressed={filter === name}
                   className={`rounded-full px-4 py-2 text-sm transition ${
                     filter === name
@@ -132,6 +143,18 @@ export default function Projects() {
             </Reveal>
           ))}
         </div>
+
+        {hasMore && (
+          <div className="mt-10 flex justify-center">
+            <button
+              type="button"
+              onClick={() => setVisibleCount((c) => c + PAGE_SIZE)}
+              className="rounded-full border border-white/15 px-6 py-3 text-sm font-semibold transition hover:border-amber-400/40 hover:bg-white/[.04]"
+            >
+              Load more
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Modal */}
