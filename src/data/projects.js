@@ -52,18 +52,6 @@ export const projects = [
     accent: "from-violet-500/30 to-indigo-500/10",
   },
   {
-    title: "Tel5 Migration",
-    category: "WordPress",
-    live: "https://migration.tel5projects.com.au/",
-    points: [
-      "Worked on website page styling and content presentation.",
-      "Focused on clean layouts and responsive page appearance.",
-    ],
-    tech: ["WordPress", "Page Styling", "Responsive Layout"],
-    tag: "Migration",
-    accent: "from-amber-500/30 to-orange-500/10",
-  },
-  {
     title: "Migration Options",
     category: "WordPress",
     live: "https://www.migrationoptions.com.au/",
