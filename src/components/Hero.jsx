@@ -1,13 +1,6 @@
 import { ArrowDown, ArrowUpRight, Github, Linkedin } from "lucide-react";
 import { site } from "../data/site";
-import { projects } from "../data/projects";
 import useTypewriter from "../hooks/useTypewriter";
-
-const stats = [
-  [`${projects.length}`, "Live client sites"],
-  [`${new Set(projects.map((p) => p.category)).size}`, "Platforms (WordPress, Square)"],
-  [`${site.experienceMonths} mo`, "Hands-on experience"],
-];
 
 export default function Hero() {
   const text = useTypewriter(site.roles);
@@ -61,15 +54,6 @@ export default function Hero() {
               <Linkedin />
             </a>
           </div>
-
-          <dl className="mt-12 grid max-w-xl grid-cols-3 gap-4 border-t border-white/10 pt-6">
-            {stats.map(([value, label]) => (
-              <div key={label}>
-                <dt className="text-2xl font-bold text-white sm:text-3xl">{value}</dt>
-                <dd className="mt-1 text-xs text-zinc-500 sm:text-sm">{label}</dd>
-              </div>
-            ))}
-          </dl>
         </div>
 
         <div className="glass relative overflow-hidden rounded-3xl p-6 shadow-2xl">
