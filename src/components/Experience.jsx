@@ -17,7 +17,7 @@ const tools = [
   { name: "HTML", color: "bg-orange-500/20 text-orange-300 border-orange-500/30" },
   { name: "CSS", color: "bg-blue-500/20 text-blue-300 border-blue-500/30" },
   { name: "Bootstrap", color: "bg-violet-500/20 text-violet-300 border-violet-500/30" },
-  { name: "JavaScript", color: "bg-yellow-500/20 text-yellow-200 border-yellow-500/30" },
+  { name: "JavaScript Basics", color: "bg-yellow-500/20 text-yellow-200 border-yellow-500/30" },
   { name: "React Basics", color: "bg-cyan-500/20 text-cyan-300 border-cyan-500/30" },
   { name: "WordPress", color: "bg-sky-500/20 text-sky-300 border-sky-500/30" },
   { name: "GitHub", color: "bg-zinc-500/20 text-zinc-300 border-zinc-500/30" },
