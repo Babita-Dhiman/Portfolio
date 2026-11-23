@@ -2,16 +2,6 @@ import { ArrowDown, ArrowUpRight, Github, Linkedin, Code2, Heart } from "lucide-
 import { site } from "../data/site";
 import useTypewriter from "../hooks/useTypewriter";
 
-const techStack = [
-  { name: "HTML", color: "text-orange-400" },
-  { name: "CSS", color: "text-blue-400" },
-  { name: "Bootstrap", color: "text-violet-400" },
-  { name: "JavaScript", color: "text-yellow-300" },
-  { name: "React", color: "text-cyan-400" },
-  { name: "Tailwind", color: "text-sky-400" },
-  { name: "WordPress", color: "text-blue-300" },
-];
-
 export default function Hero() {
   const text = useTypewriter(site.roles);
 
@@ -73,25 +63,6 @@ export default function Hero() {
             <a href={site.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn" className="transition hover:text-white">
               <Linkedin />
             </a>
-          </div>
-
-          {/* Tech stack */}
-          <div className="mt-10">
-            <p className="mb-3 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[.2em] text-zinc-500">
-              <span className="h-3 w-0.5 rounded-full bg-amber-400" aria-hidden="true" />
-              Tech Stack
-            </p>
-            <ul className="flex flex-wrap gap-2.5">
-              {techStack.map((t) => (
-                <li
-                  key={t.name}
-                  className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[.03] px-3 py-1.5 text-xs font-medium text-zinc-300"
-                >
-                  <span className={`h-1.5 w-1.5 rounded-full ${t.color.replace("text-", "bg-")}`} aria-hidden="true" />
-                  <span className={t.color}>{t.name}</span>
-                </li>
-              ))}
-            </ul>
           </div>
         </div>
 
