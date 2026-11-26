@@ -16,7 +16,6 @@ import {
   Github,
   Terminal,
   Chrome,
-  Lightbulb,
 } from "lucide-react";
 import Reveal from "./Reveal";
 import SectionHeading from "./SectionHeading";
@@ -74,25 +73,11 @@ export default function Skills() {
 
       <div className="container-width relative">
         <Reveal>
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-            <SectionHeading number="02" label="Skills" title="Tools I use to build.">
-              <p className="mt-3 max-w-xl text-zinc-400">
-                Modern tools and technologies to create fast, scalable and beautiful websites.
-              </p>
-            </SectionHeading>
-
-            {/* floating tech badges */}
-            <div className="flex flex-wrap gap-2 lg:justify-end">
-              {[Code2, Globe, Atom, PenTool].map((Icon, i) => (
-                <span
-                  key={i}
-                  className="grid h-11 w-11 place-items-center rounded-2xl border border-amber-400/25 bg-zinc-950/80 text-amber-400 shadow-[0_0_20px_-6px_rgba(245,158,11,0.35)]"
-                >
-                  <Icon size={18} strokeWidth={1.75} />
-                </span>
-              ))}
-            </div>
-          </div>
+          <SectionHeading number="02" label="Skills" title="Tools I use to build.">
+            <p className="mt-3 max-w-xl text-zinc-400">
+              Modern tools and technologies to create fast, scalable and beautiful websites.
+            </p>
+          </SectionHeading>
         </Reveal>
 
         <div className="mt-12 grid gap-5 md:grid-cols-3">
@@ -123,16 +108,6 @@ export default function Skills() {
             </Reveal>
           ))}
         </div>
-
-        <Reveal delay={280}>
-          <div className="mt-10 flex items-center justify-center gap-3 rounded-full border border-amber-400/20 bg-zinc-950/50 px-5 py-3.5 text-sm text-zinc-400">
-            <Lightbulb size={16} className="shrink-0 text-amber-400" />
-            <p>
-              Always exploring new tools to build{" "}
-              <span className="font-medium text-amber-400">better solutions</span>.
-            </p>
-          </div>
-        </Reveal>
       </div>
     </section>
   );
