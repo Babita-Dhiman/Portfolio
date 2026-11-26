@@ -18,7 +18,6 @@ const tools = [
   { name: "CSS", color: "bg-blue-500/20 text-blue-300 border-blue-500/30" },
   { name: "Bootstrap", color: "bg-violet-500/20 text-violet-300 border-violet-500/30" },
   { name: "JavaScript Basics", color: "bg-yellow-500/20 text-yellow-200 border-yellow-500/30" },
-  { name: "React Basics", color: "bg-cyan-500/20 text-cyan-300 border-cyan-500/30" },
   { name: "WordPress", color: "bg-sky-500/20 text-sky-300 border-sky-500/30" },
   { name: "GitHub", color: "bg-zinc-500/20 text-zinc-300 border-zinc-500/30" },
 ];
@@ -34,11 +33,10 @@ export default function Experience() {
         <Reveal delay={100}>
           {/* Main experience card */}
           <div className="glass mt-10 overflow-hidden rounded-3xl p-6 sm:p-8">
-            <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:gap-10">
+            <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:gap-10">
               {/* Left: role + description */}
               <div className="flex flex-1 gap-4 sm:gap-5">
                 <div className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-sky-500/15 text-sky-400 sm:h-16 sm:w-16">
-                  {/* WordPress-style W mark */}
                   <span className="text-2xl font-black tracking-tight sm:text-3xl">W</span>
                 </div>
                 <div className="min-w-0">
@@ -54,7 +52,7 @@ export default function Experience() {
                 </div>
               </div>
 
-              {/* Right: checklist */}
+              {/* Right: checklist - vertically centered */}
               <ul className="grid flex-1 gap-x-6 gap-y-3 sm:grid-cols-2 lg:max-w-md">
                 {work.map((item) => (
                   <li key={item} className="flex items-center gap-2.5 text-sm text-zinc-300">
