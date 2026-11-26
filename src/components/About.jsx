@@ -35,8 +35,8 @@ export default function About() {
       />
 
       <div className="container-width relative grid items-start gap-12 lg:grid-cols-[1fr_1.05fr] lg:gap-16">
-        {/* Left content - sticky + top aligned */}
-        <Reveal className="lg:sticky lg:top-28 lg:self-start">
+        {/* Left content */}
+        <Reveal>
           <SectionHeading number="01" label="About" title="A frontend developer who cares about details.">
             <p className="mt-5 max-w-md text-base leading-7 text-zinc-400">
               I build responsive, user-friendly websites and web interfaces with a strong focus on clean UI,
