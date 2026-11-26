@@ -34,9 +34,9 @@ export default function About() {
         aria-hidden="true"
       />
 
-      <div className="container-width relative grid items-center gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
-        {/* Left content */}
-        <Reveal>
+      <div className="container-width relative grid items-start gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
+        {/* Left content - sticky */}
+        <Reveal className="lg:sticky lg:top-28 lg:self-start">
           <SectionHeading number="01" label="About" title="A frontend developer who cares about details.">
             <p className="mt-5 max-w-md text-base leading-7 text-zinc-400">
               I build responsive, user-friendly websites and web interfaces with a strong focus on clean UI,
